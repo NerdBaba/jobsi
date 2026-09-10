@@ -122,12 +122,22 @@ Adapts to content without scroll jarring.
 
 ## 🛠️ Roadmap
 
-- [ ] Implement actual web scrapers
+- [x] Implement actual web scrapers (FreshersNow scraper fully functional)
 - [ ] Add SQLite persistence
 - [ ] Push notifications for new jobs
 - [ ] Dark mode support
 - [ ] Export to CSV
 - [ ] Multiple job search queries
+- [ ] Implement additional job board scrapers (LinkedIn, Indeed, GitHub, StackOverflow)
+
+## ✅ Recent Updates
+
+- **FreshersNow Scraper**: Fully functional with proxy integration, HTML parsing, and fallback mechanism
+- **AppSettings Integration**: User preferences now persist and sync across the app
+- **Loading States**: UI shows loading indicators and empty states for better UX
+- **Date Parsing**: Proper relative date parsing for job postings
+- **Scraper Management**: Clean separation between active and placeholder scrapers
+- **Refresh Functionality**: Automatic refresh based on configurable intervals
 
 ## 📝 License
 

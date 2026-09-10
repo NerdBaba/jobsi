@@ -18,8 +18,9 @@ final class ScraperTests: XCTestCase {
         let manager = ModuleManager.shared
         let scrapers = manager.getActiveScrapers()
         
-        // Verify all default scrapers are registered
-        XCTAssertTrue(scrapers.count >= 4)
+        // Verify FreshersNow scraper is registered (the only active scraper)
+        XCTAssertTrue(scrapers.count >= 1)
+        XCTAssertTrue(scrapers.contains { $0.moduleName == "FreshersNow" })
     }
     
     func testAddCustomScraper() {
@@ -34,6 +35,12 @@ final class ScraperTests: XCTestCase {
         manager.addScraper(TestScraper())
         let afterCount = manager.getActiveScrapers().count
         
+        // Should add the scraper since it's a new module name
         XCTAssertEqual(afterCount, beforeCount + 1)
+        
+        // Try adding the same scraper again - should not duplicate
+        manager.addScraper(TestScraper())
+        let finalCount = manager.getActiveScrapers().count
+        XCTAssertEqual(finalCount, afterCount)
     }
 }

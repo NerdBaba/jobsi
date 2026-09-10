@@ -22,50 +22,51 @@ struct ScraperModule {
     }
 }
 
-// MARK: - GitHub Scraper Example
+// MARK: - GitHub Scraper (Placeholder)
 final class GitHubScraper: JobScraperProtocol {
     let moduleName = "GitHub"
     
     func fetchJobs() async throws -> [Job] {
-        // TODO: Implement GitHub API or scraping logic
-        await Task.yield()
-        
+        // GitHub Jobs API was deprecated in 2024. 
+        // To implement: Use GitHub GraphQL API or scrape github.com/jobs
+        // Requires authentication and careful rate limiting.
+        print("GitHubScraper: Not implemented - API deprecated")
         return []
     }
 }
 
-// MARK: - LinkedIn Scraper Example
+// MARK: - LinkedIn Scraper (Placeholder)
 final class LinkedInScraper: JobScraperProtocol {
     let moduleName = "LinkedIn"
     
     func fetchJobs() async throws -> [Job] {
-        // TODO: Implement LinkedIn scraping logic
-        await Task.yield()
-        
+        // LinkedIn requires authentication and has strict anti-scraping measures.
+        // To implement: Use official LinkedIn API or Selenium/Puppeteer with user agents.
+        print("LinkedInScraper: Not implemented - requires authentication")
         return []
     }
 }
 
-// MARK: - Indeed Scraper Example
+// MARK: - Indeed Scraper (Placeholder)
 final class IndeedScraper: JobScraperProtocol {
     let moduleName = "Indeed"
     
     func fetchJobs() async throws -> [Job] {
-        // TODO: Implement Indeed scraping logic
-        await Task.yield()
-        
+        // Indeed has a public API but requires API key registration.
+        // To implement: Register at indeed.com/publisher and use their API.
+        print("IndeedScraper: Not implemented - requires API key")
         return []
     }
 }
 
-// MARK: - Stack Overflow Scraper Example
+// MARK: - Stack Overflow Scraper (Placeholder)
 final class StackOverflowScraper: JobScraperProtocol {
     let moduleName = "StackOverflow"
     
     func fetchJobs() async throws -> [Job] {
-        // TODO: Implement Stack Overflow Jobs scraping logic
-        await Task.yield()
-        
+        // Stack Overflow Jobs API requires authentication.
+        // To implement: Use Stack Exchange API with OAuth.
+        print("StackOverflowScraper: Not implemented - requires API key")
         return []
     }
 }
@@ -81,11 +82,9 @@ final class ModuleManager {
     }
     
     private func registerScrapers() {
+        // Only register the FreshersNow scraper since it's the only fully implemented one.
+        // Other scrapers are placeholders that return empty arrays.
         scrapers = [
-            GitHubScraper(),
-            LinkedInScraper(),
-            IndeedScraper(),
-            StackOverflowScraper(),
             FreshersNowScraper()
         ]
     }
@@ -95,6 +94,9 @@ final class ModuleManager {
     }
     
     func addScraper(_ scraper: any JobScraperProtocol) {
-        scrapers.append(scraper)
+        // Check if scraper with same module name already exists
+        if !scrapers.contains(where: { $0.moduleName == scraper.moduleName }) {
+            scrapers.append(scraper)
+        }
     }
 }

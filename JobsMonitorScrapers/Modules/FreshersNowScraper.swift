@@ -90,13 +90,16 @@ final class FreshersNowScraper: JobScraperProtocol {
         return jobs
     }
 
+    /// Compiled once and reused for every fetch instead of being recompiled
+    /// on each call (see FRESHERSNOW_MODULE.md "Parsing Speed" note).
+    private static let hrefRegex = try! NSRegularExpression(pattern: #"href\s*=\s*["']([^"']+)["']"#)
+
     /// Collect all `href` values from the HTML, preserving order.
     private func extractHrefs(_ html: String) -> [String] {
-        let regex = try! NSRegularExpression(pattern: #"href\s*=\s*["']([^"']+)["']"#)
         let nsString = html as NSString
         let range = NSRange(location: 0, length: nsString.length)
 
-        return regex.matches(in: nsString as String, options: [], range: range).compactMap { match in
+        return Self.hrefRegex.matches(in: nsString as String, options: [], range: range).compactMap { match in
             let capture = match.range(at: 1)
             guard capture.location != NSNotFound else { return nil }
             return nsString.substring(with: capture) as String

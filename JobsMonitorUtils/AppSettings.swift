@@ -1,18 +1,20 @@
 import Foundation
 import Combine
 
-final class AppSettings {
-    static let shared = AppSettings()
+/// Manages user preferences and app settings.
+/// Public so it can be accessed across package targets.
+public final class AppSettings {
+    public static let shared = AppSettings()
     
     private let userDefaults: UserDefaults
     private var cancellables = Set<AnyCancellable>()
     
-    @Published var lastRefreshDate: Date?
-    @Published var enabledModules: [String] = []
-    @Published var checkInterval: Int = 30 // minutes
-    @Published var notifyOnNewJob: Bool = true
+    @Published public var lastRefreshDate: Date?
+    @Published public var enabledModules: [String] = []
+    @Published public var checkInterval: Int = 30 // minutes
+    @Published public var notifyOnNewJob: Bool = true
     
-    private init(userDefaults: UserDefaults = .standard) {
+    public init(userDefaults: UserDefaults = .standard) {
         self.userDefaults = userDefaults
         
         loadSettings()
@@ -56,7 +58,7 @@ final class AppSettings {
             .store(in: &cancellables)
     }
     
-    func resetToDefaults() {
+    public func resetToDefaults() {
         userDefaults.removeObject(forKey: "lastRefreshDate")
         userDefaults.removeObject(forKey: "enabledModules")
         userDefaults.removeObject(forKey: "checkInterval")

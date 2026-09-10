@@ -1,22 +1,14 @@
-import SwiftUI
 import AppKit
 
-class AppDelegate: NSObject, NSApplicationDelegate {
-    
-    func applicationDidFinishLaunching(_ notification: Notification) {
-        // Handle first launch setup if needed
-    }
-    
-    func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
-        return false // Keep running as menu bar app
-    }
-    
-    func applicationWillBecomeActive(_ notification: Notification) {
-        // Refresh jobs when app becomes active
-        NotificationCenter.default.post(name: .refreshJobs, object: nil)
-    }
-}
+final class AppDelegate: NSObject, NSApplicationDelegate {
 
-extension Notification.Name {
-    static let refreshJobs = Notification.Name("refreshJobs")
+    func applicationDidFinishLaunching(_ notification: Notification) {
+        // First-launch setup (e.g. registering a login item) can go here.
+    }
+
+    /// With no `WindowGroup` (menu-bar-only app), there are no windows to keep
+    /// the process alive on; return false so the app stays resident.
+    func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
+        return false
+    }
 }

@@ -2,9 +2,9 @@ import SwiftUI
 import AppKit
 
 struct TabViewContainer: View {
+    @EnvironmentObject private var viewModel: JobsListViewModel
     @Binding var selectedTab: Int
-    @ObservedObject var viewModel = JobsListViewModel()
-    
+
     var body: some View {
         VStack(spacing: 0) {
             // Custom Tab Bar
@@ -23,9 +23,9 @@ struct TabViewContainer: View {
                     .foregroundColor(selectedTab == index ? .primary : .secondary)
                     .background(
                         RoundedRectangle(cornerRadius: 8)
-                            .fill(selectedTab == index ? Color.blue.opacity(0.1) : Color.clear)
+                            .fill(selectedTab == index ? Color.accentColor.opacity(0.12) : Color.clear)
                     )
-                    
+
                     if index < viewModel.categories.count - 1 {
                         Divider()
                             .frame(height: 30)
@@ -34,9 +34,9 @@ struct TabViewContainer: View {
             }
             .background(Color(NSColor.windowBackgroundColor))
         }
-        .shadow(color: Color.black.opacity(0.05), radius: 4, x: 0, y: 2)
+        .shadow(color: Color(NSColor.separatorColor).opacity(0.45), radius: 1, x: 0, y: 1)
     }
-    
+
     private func iconForCategory(_ index: Int) -> String {
         let icons = ["briefcase", "code", "chart.line.uptrend.xyaxis", "laptopcomputer", "building"]
         return index < icons.count ? icons[index] : "briefcase"

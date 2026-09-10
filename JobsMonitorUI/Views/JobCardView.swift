@@ -4,7 +4,7 @@ import JobsMonitorModels
 
 struct JobCardView: View {
     let job: Job
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             // Job Title & Company
@@ -12,27 +12,28 @@ struct JobCardView: View {
                 Circle()
                     .fill(colorForCategory(job.category))
                     .frame(width: 4, height: 4)
-                
+                    .accessibilityHidden(true)
+
                 VStack(alignment: .leading, spacing: 4) {
                     Text(job.title)
                         .font(.headline)
                         .lineLimit(2)
-                    
+
                     Text(job.company)
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                 }
-                
+
                 Spacer()
             }
-            
+
             // Description Preview
             Text(job.descriptionPreview)
                 .font(.body)
                 .foregroundColor(.secondary)
                 .lineLimit(3)
                 .frame(maxWidth: .infinity, alignment: .leading)
-            
+
             // Metadata Row
             HStack(spacing: 16) {
                 HStack(spacing: 4) {
@@ -41,14 +42,14 @@ struct JobCardView: View {
                         .font(.caption)
                         .foregroundColor(.secondary)
                 }
-                
+
                 HStack(spacing: 4) {
                     Image(systemName: "calendar")
                     Text(job.postedDate)
                         .font(.caption)
                         .foregroundColor(.secondary)
                 }
-                
+
                 HStack(spacing: 4) {
                     Image(systemName: "currency-dollar")
                     if let salary = job.salary {
@@ -62,9 +63,9 @@ struct JobCardView: View {
                     }
                 }
             }
-            
+
             // Action Button
-            Button(action: { openApplyLink() }) {
+            Button(action: openApplyLink) {
                 HStack {
                     Text("Apply Now")
                     Image(systemName: "arrow.up.right")
@@ -73,10 +74,11 @@ struct JobCardView: View {
                 .foregroundColor(.white)
                 .padding(.horizontal, 20)
                 .padding(.vertical, 10)
-                .background(Color.blue)
+                .background(Color.accentColor)
                 .cornerRadius(8)
             }
             .buttonStyle(.plain)
+            .accessibilityLabel("Apply to \(job.title) at \(job.company)")
         }
         .padding()
         .background(
@@ -85,7 +87,7 @@ struct JobCardView: View {
                 .shadow(color: Color.black.opacity(0.05), radius: 3, x: 0, y: 2)
         )
     }
-    
+
     private func colorForCategory(_ category: String) -> Color {
         switch category.lowercased() {
         case "software engineering": return .blue
@@ -95,9 +97,13 @@ struct JobCardView: View {
         default: return .gray
         }
     }
-    
+
     private func openApplyLink() {
-        NSWorkspace.shared.open(URL(string: job.applyLink)!)
+        guard let url = URL(string: job.applyLink) else {
+            print("JobCardView: malformed apply link — \(job.applyLink)")
+            return
+        }
+        NSWorkspace.shared.open(url)
     }
 }
 

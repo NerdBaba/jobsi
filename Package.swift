@@ -38,7 +38,7 @@ let package = Package(
         ),
         .target(
             name: "JobsMonitorUI",
-            dependencies: ["JobsMonitorModels", "JobsMonitorScrapers"],
+            dependencies: ["JobsMonitorModels", "JobsMonitorScrapers", "JobsMonitorUtils"],
             path: "JobsMonitorUI"
         ),
         .target(
@@ -48,7 +48,7 @@ let package = Package(
         ),
         .executableTarget(
             name: "JobsMonitorApp",
-            dependencies: ["JobsMonitorUI"],
+            dependencies: ["JobsMonitorUI", "JobsMonitorUtils"],
             path: "JobsMonitor",
             exclude: ["Info.plist", "JobsMonitor-Bridging-Header.h"]
         ),
@@ -57,7 +57,8 @@ let package = Package(
             dependencies: [
                 "JobsMonitorModels",
                 "JobsMonitorScrapers",
-                "JobsMonitorUI"
+                "JobsMonitorUI",
+                "JobsMonitorUtils"
             ],
             path: "JobsMonitorTests"
         )
