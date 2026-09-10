@@ -1,0 +1,93 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A1000001 /* JobsMonitorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000001 /* JobsMonitorApp.swift */; };
+		A1000002 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000002 /* AppDelegate.swift */; };
+		A1000003 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2000003 /* Info.plist */; };
+		A1000004 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000004 /* ContentView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		A2000001 /* JobsMonitorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = source.swift; path = JobsMonitorApp.swift; sourceTree = "<group>"; };
+		A2000002 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = source.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A2000003 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A2000004 /* JobsMonitor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JobsMonitor.app; sourceTree = BUILT_PRODUCT_DIR_RELATIVE; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		RootGroup = {
+			isa = PBXGroup;
+			children = (
+				JobsMonitor,
+				JobsMonitorUI,
+				JobsMonitorModels,
+				JobsMonitorScrapers,
+				JobsMonitorUtils,
+				Products,
+			);
+			sourceTree = "<group>";
+		};
+		JobsMonitor = {
+			isa = PBXGroup;
+			children = (
+				JobsMonitorApp.swift,
+				AppDelegate.swift,
+				Info.plist,
+			);
+			path = JobsMonitor;
+			sourceTree = "<group>";
+		};
+		JobsMonitorUI = {
+			isa = PBXGroup;
+			children = (
+				Views,
+				ViewModels,
+			);
+			path = JobsMonitorUI;
+			sourceTree = "<group>";
+		};
+		JobsMonitorModels = {
+			isa = PBXGroup;
+			children = (
+				Models,
+				Repositories,
+			);
+			path = JobsMonitorModels;
+			sourceTree = "<group>";
+		};
+		JobsMonitorScrapers = {
+			isa = PBXGroup;
+			children = (
+				Modules,
+			);
+			path = JobsMonitorScrapers;
+			sourceTree = "<group>";
+		};
+		JobsMonitorUtils = {
+			isa = PBXGroup;
+			children = (
+				Extensions,
+			);
+			path = JobsMonitorUtils;
+			sourceTree = "<group>";
+		};
+		Products = {
+			isa = PBXGroup;
+			children = (
+				A2000004 /* JobsMonitor.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXProject group section */
+	};
+	rootObject = A0000000 /* Project object */;
+}
